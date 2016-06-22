@@ -1,7 +1,8 @@
 <html>
 
     <head>
-        <title>Telnet client using WebSockets</title>
+        <title>Websolify</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flat-ui/2.3.0/css/flat-ui.css">
         <script src="include/base64.js"></script>
         <script src="include/util.js"></script>
         <script src="include/websock.js"></script>
@@ -13,15 +14,23 @@
 
     <body>
 
-        Host: <input id='host' value='localhost' style='width:100'>&nbsp;
-        Port: <input id='port' value='6023' style='width:50'>&nbsp;
+        <div class='container'>
+        Host: <input id='host' class='form-control' style='width:120px;'>&nbsp;
+        Port: <input id='port' class='form-control' style='width:80px;'>&nbsp;
         Encrypt: <input id='encrypt' type='checkbox'>&nbsp;
-        <input id='connectButton' type='button' value='Connect' style='width:100px'
-            onclick="connect();">&nbsp;
-
-        <br><br>
+        <input id='connectButton' class='btn btn-block btn-lg btn-primary' type='button' value='Connect' 
+            onclick="connect();">
+        <br>
+        <br>
 
         <pre id="terminal"></pre>
+        </div>
+        <style>
+            #terminal { line-height: 1; display: inline-block; font-size: 18px; background: #000; border-color: #000;  } 
+            #terminal > b { background: #000; }
+            div.container { text-align: center; padding-top: 50px; }
+            body { background-image: url('https://duquets.files.wordpress.com/2014/09/gradient_bg.jpg'); background-repeat: no-repeat; background-size: cover; }
+        </style>
 
         <script>
             var telnet;
