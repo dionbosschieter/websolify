@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <strings.h>
-#include <sys/types.h> 
+#include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -758,9 +758,7 @@ void start_server() {
         clilen = sizeof(cli_addr);
         pipe_error = 0;
         pid = 0;
-        csock = accept(lsock, 
-                       (struct sockaddr *) &cli_addr, 
-                       &clilen);
+        csock = accept(lsock, (struct sockaddr *) &cli_addr, &clilen);
         if (csock < 0) {
             error("ERROR on accept");
             continue;
@@ -795,7 +793,7 @@ void start_server() {
                 handler_emsg("Closing due to SIGPIPE\n");
             }
             break;   // Child process exits
-        } else {         // parent process
+        } else {     // parent process
             settings.handler_id += 1;
         }
     }
@@ -811,6 +809,5 @@ void start_server() {
     } else {
         handler_msg("websockify exit\n");
     }
-
 }
 
