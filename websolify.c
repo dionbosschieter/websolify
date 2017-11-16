@@ -17,6 +17,7 @@
 #include <sys/select.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+#include <ipmiconsole.h>
 #include "websocket.h"
 #include "solsession.h"
 
@@ -45,17 +46,16 @@ char USAGE[] = "Usage: [options] " \
     fprintf(stderr, fmt , ## args); \
     exit(1);
 
-char *username = "admin";
-char *password = "koekje123";
+char *username = "";
+char *password = "";
 char target_host[256];
 int target_port;
 
-extern pipe_error;
 extern settings_t settings;
 
 void proxy_handler(ws_ctx_t *ws_ctx) {
     // setup the arguments for solsession
-    struct args *arguments = (struct args*) malloc(sizeof(struct args));
+    struct args *args = (struct args*) malloc(sizeof(struct args));
 
 	args->config.workaround_flags = 0;
 	args->config.cipher_suite_id = 3;
@@ -75,6 +75,7 @@ void proxy_handler(ws_ctx_t *ws_ctx) {
     args->hostname = target_host;
 	args->config.username = username;
 	args->config.password = password;
+    printf("user = %s, pass = %s\n", args->config.username, args->config.password);
 
     // connect
     solsession(args, ws_ctx->sockfd);
@@ -82,7 +83,7 @@ void proxy_handler(ws_ctx_t *ws_ctx) {
 
 int main(int argc, char *argv[])
 {
-    int fd, c, option_index = 0;
+    int c, option_index = 0;
     static int ssl_only = 0, daemon = 0, run_once = 0, verbose = 0;
     char *found;
     static struct option long_options[] = {
@@ -136,8 +137,6 @@ int main(int argc, char *argv[])
                     usage("No key file at %s\n", optarg);
                 }
                 break;
-            default:
-                usage("");
         }
     }
     settings.verbose      = verbose;

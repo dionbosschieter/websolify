@@ -64,7 +64,7 @@ typedef struct {
     int run_once;
 } settings_t;
 
-
+void start_server();
 ssize_t ws_recv(ws_ctx_t *ctx, void *buf, size_t len);
 
 ssize_t ws_send(ws_ctx_t *ctx, const void *buf, size_t len);

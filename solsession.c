@@ -39,6 +39,8 @@
  ******************************************************************************/
 #define BUFLEN	4096
 
+#define sigterm 0
+
 int solsession(struct args *args, int fd)
 /*
  * Establish and proxy a IPMI connection
@@ -60,7 +62,7 @@ int solsession(struct args *args, int fd)
 	dprintf(D_L0, "Establishing IPMI connection to %s...\n", args->hostname);
 	ictx = ipmiconsole_ctx_create(args->hostname, &args->config, &args->protocol, &args->engine);
 	if (!ictx) {
-		eprintf("Could not establish connection to %s: %s\n", args->hostname, strerror(errno));
+		printf("Could not establish connection(create_ctx) to %s: %s\n", args->hostname, strerror(errno));
 		return -1;
 	}
 

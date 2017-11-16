@@ -19,6 +19,10 @@
 #define SOLSESSION_H
 
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ipmiconsole.h>
+#include <errno.h>
 
 struct args {
 	char* hostname;
@@ -36,6 +40,7 @@ int solsession(struct args *args, int fd);
 #define D_L1		2
 #define D_L2		3
 #define D_MAX		D_L2
+#define verbosity   100
 
 #define eprintf(...)		fprintf(stderr, __VA_ARGS__)
 #define fatalf(...) \

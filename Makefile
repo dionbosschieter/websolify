@@ -13,11 +13,12 @@ all: $(TARGETS)
 %: %.o
 	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
 
-websolify: websolify.o websocket.o
-	$(CC) $(LDFLAGS) $^ -lssl -lcrypto -lresolv -o $@
+websolify: websolify.o solsession.o websocket.o
+	$(CC) $(LDFLAGS) $^ $(LDLIBS) -lssl -lcrypto -lresolv -o $@
 
 websocket.o: websocket.c websocket.h
 websolify.o: websolify.c websocket.h
+solsession.o: solsession.c solsession.h
 
 clean:
 	$(RM) *.o *~ websolify
